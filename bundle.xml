@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<adapt_framework>
+    <bundle>
+        <name>locales</name>
+        <label>Locales</label>
+        <type>extension</type>
+        <version>1.0.0</version>
+        <namespace>/extensions/locales</namespace>
+        <description>Provides the foundation for locality based information.</description>
+        <copyright>2015 Adapt Framework</copyright>
+        <license>MIT</license>
+        <website>http://www.adaptframework.com/documentaion/extentions/locales</website>
+        <settings>
+            <category name="Default locales">
+                <setting>
+                    <name>locales.default_date_format</name>
+                    <label>Default date format</label>
+                    <default_value>date</default_value>
+                </setting>
+                <setting>
+                    <name>locales.default_time_format</name>
+                    <label>Default time format</label>
+                    <default_value>time</default_value>
+                </setting>
+                <setting>
+                    <name>locales.default_datetime_format</name>
+                    <label>Default date/time format</label>
+                    <default_value>datetime</default_value>
+                </setting>
+            </category>
+        </settings>
+        <schema_installed>Yes</schema_installed>
+    </bundle>
+</adapt_framework>
