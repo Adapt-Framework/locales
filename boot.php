@@ -146,15 +146,17 @@ $adapt->on(
     \frameworks\adapt\base::EVENT_READY,
     function($event){
         $adapt = $GLOBALS['adapt'];
-        $datetime = $adapt->data_source->get_data_type($this->setting('locales.default_datetime_format'));
-        $date = $adapt->data_source->get_data_type($this->setting('locales.default_date_format'));
-        $time = $adapt->data_source->get_data_type($this->setting('locales.default_time_format'));
-        $adapt->dom->head->add(new html_meta(array('class' => 'setting', 'name' => 'locales.default_date_format', 'content' => $date['name'])));
-        $adapt->dom->head->add(new html_meta(array('class' => 'setting', 'name' => 'locales.default_time_format', 'content' => $time['name'])));
-        $adapt->dom->head->add(new html_meta(array('class' => 'setting', 'name' => 'locales.default_datetime_format', 'content' => $datetime['name'])));
-        $adapt->dom->head->add(new html_meta(array('class' => 'setting', 'name' => 'locales.default_date_pattern', 'content' => $date['datetime_format'])));
-        $adapt->dom->head->add(new html_meta(array('class' => 'setting', 'name' => 'locales.default_time_pattern', 'content' => $time['datetime_format'])));
-        $adapt->dom->head->add(new html_meta(array('class' => 'setting', 'name' => 'locales.default_datetime_pattern', 'content' => $datetime['datetime_format'])));
+        if ($adapt->dom && $adapt->dom instanceof \frameworks\adapt\page){
+            $datetime = $adapt->data_source->get_data_type($this->setting('locales.default_datetime_format'));
+            $date = $adapt->data_source->get_data_type($this->setting('locales.default_date_format'));
+            $time = $adapt->data_source->get_data_type($this->setting('locales.default_time_format'));
+            $adapt->dom->head->add(new html_meta(array('class' => 'setting', 'name' => 'locales.default_date_format', 'content' => $date['name'])));
+            $adapt->dom->head->add(new html_meta(array('class' => 'setting', 'name' => 'locales.default_time_format', 'content' => $time['name'])));
+            $adapt->dom->head->add(new html_meta(array('class' => 'setting', 'name' => 'locales.default_datetime_format', 'content' => $datetime['name'])));
+            $adapt->dom->head->add(new html_meta(array('class' => 'setting', 'name' => 'locales.default_date_pattern', 'content' => $date['datetime_format'])));
+            $adapt->dom->head->add(new html_meta(array('class' => 'setting', 'name' => 'locales.default_time_pattern', 'content' => $time['datetime_format'])));
+            $adapt->dom->head->add(new html_meta(array('class' => 'setting', 'name' => 'locales.default_datetime_pattern', 'content' => $datetime['datetime_format'])));
+        }
     }
 );
 
