@@ -2,14 +2,144 @@
 <adapt_framework>
     <bundle>
         <name>locales</name>
-        <label>Locales</label>
+        <label>Adapt Locales</label>
         <type>extension</type>
         <version>1.0.0</version>
-        <namespace>/extensions/locales</namespace>
+        <namespace>\adapt\locales</namespace>
         <description>Provides the foundation for locality based information.</description>
         <copyright>2015 Adapt Framework</copyright>
         <license>MIT</license>
         <website>http://www.adaptframework.com/documentaion/extentions/locales</website>
+        <depends_on>
+            <bundle>
+                <name>adapt</name>
+                <version>1.0</version>
+            </bundle>
+        </depends_on>
+        <schema>
+            <add>
+                <table name="data_type">
+                    <record>
+                        <name>locales_date</name>
+                        <based_on_data_type>date</based_on_data_type>
+                        <validator>date</validator>
+                        <formatter>locates_date</formatter>
+                        <unformatter>locales_date</unformatter>
+                    </record>
+                    <record>
+                        <name>locales_time</name>
+                        <based_on_data_type>time</based_on_data_type>
+                        <validator>time</validator>
+                        <formatter>locates_time</formatter>
+                        <unformatter>locales_time</unformatter>
+                    </record>
+                    <record>
+                        <name>locales_datetime</name>
+                        <based_on_data_type>datetime</based_on_data_type>
+                        <validator>datetime</validator>
+                        <formatter>locates_datetime</formatter>
+                        <unformatter>locales_datetime</unformatter>
+                    </record>
+                </table>
+                <table name="country">
+                    <field name="country_id" key="primary" auto-increment="Yes">
+                        <data_type>bigint</data_type>
+                        <label>Country #</label>
+                    </field>
+                    <field name="bundle_version_id" key="foreign" referenced-table-name="bundle_version" referenced-field-name="bundle_version_id">
+                        <data_type>bigint</data_type>
+                        <label>Bundle</label>
+                    </field>
+                    <field name="name" index="Yes" index-size="32">
+                        <data_type>varchar</data_type>
+                        <max_length>64</max_length>
+                        <nullable>No</nullable>
+                        <label>Short name</label>
+                    </field>
+                    <field name="label">
+                        <data_type>varchar</data_type>
+                        <max_length>128</max_length>
+                        <nullable>No</nullable>
+                        <label>Country name</label>
+                    </field>
+                    <field name="date_data_type_id" key="foreign" referenced-table-name="date_type" referenced-field-name="data_type_id">
+                        <data_type>bigint</data_type>
+                        <lookup_table>data_type</lookup_table>
+                        <label>Date data type</label>
+                    </field>
+                    <field name="time_data_type_id" key="foreign" referenced-table-name="date_type" referenced-field-name="data_type_id">
+                        <data_type>bigint</data_type>
+                        <lookup_table>data_type</lookup_table>
+                        <label>Time data type</label>
+                    </field>
+                    <field name="datetime_data_type_id" key="foreign" referenced-table-name="date_type" referenced-field-name="data_type_id">
+                        <data_type>bigint</data_type>
+                        <lookup_table>data_type</lookup_table>
+                        <label>Datetime data type</label>
+                    </field>
+                </table>
+                <table name="country_phone_data_type">
+                    <field name="country_phone_data_type_id" key="primary" auto-increment="Yes">
+                        <data_type>bigint</data_type>
+                        <label>Country phone #</label>
+                    </field>
+                    <field name="country_id" key="foreign" referenced-table-name="country" referenced-field-name="country_id">
+                        <data_type>bigint</data_type>
+                        <lookup_table>country</lookup_table>
+                        <label>Country</label>
+                    </field>
+                    <field name="label">
+                        <data_type>varchar</data_type>
+                        <max_length>128</max_length>
+                        <nullable>No</nullable>
+                        <label>Label</label>
+                        <description>For example, Home, Mobile, Cell...</description>
+                    </field>
+                    <field name="data_type_id" key="foreign" referenced-table-name="date_type" referenced-field-name="data_type_id">
+                        <data_type>bigint</data_type>
+                        <lookup_table>data_type</lookup_table>
+                        <label>Data type</label>
+                    </field>
+                </table>
+                <table name="country_address_format">
+                    <field name="country_address_format_id" key="primary" auto-increment="Yes">
+                        <data_type>bigint</data_type>
+                        <label>Address format #</label>
+                    </field>
+                    <field name="country_id" key="foreign" referenced-table-name="country" referenced-field-name="country_id">
+                        <data_type>bigint</data_type>
+                        <lookup_table>country</lookup_table>
+                        <label>Country</label>
+                    </field>
+                    <field name="priority">
+                        <data_type>int</data_type>
+                        <nullable>No</nullable>
+                        <label>Priority</label>
+                    </field>
+                    <field name="name">
+                        <data_type>varchar</data_type>
+                        <max_length>64</max_length>
+                        <nullable>No</nullable>
+                        <label>name</label>
+                    </field>
+                    <field name="label">
+                        <data_type>varchar</data_type>
+                        <max_length>128</max_length>
+                        <nullable>No</nullable>
+                        <label>Label</label>
+                    </field>
+                    <field name="data_type_id" key="foreign" referenced-table-name="date_type" referenced-field-name="data_type_id">
+                        <data_type>bigint</data_type>
+                        <lookup_table>data_type</lookup_table>
+                        <label>Data type</label>
+                    </field>
+                    <field name="max_length">
+                        <data_type>int</data_type>
+                        <label>Max length</label>
+                    </field>
+                </table>
+            </add>
+        </schema>
         <settings>
             <category name="Default locales">
                 <setting>
