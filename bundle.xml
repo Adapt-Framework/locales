@@ -3,17 +3,17 @@
     <bundle>
         <name>locales</name>
         <label>Adapt Locales</label>
-        <type>extension</type>
+        <type>locales</type>
         <version>1.0.0</version>
         <namespace>\adapt\locales</namespace>
         <description>Provides the foundation for locality based information.</description>
         <copyright>2015 Adapt Framework</copyright>
         <license>MIT</license>
-        <website>http://www.adaptframework.com/documentaion/extentions/locales</website>
+        <website>http://www.adaptframework.com/documentaion/bundles/locales/locales-1.0.0</website>
         <depends_on>
             <bundle>
                 <name>adapt</name>
-                <version>1.0</version>
+                <version>2.0</version>
             </bundle>
         </depends_on>
         <schema>
@@ -23,21 +23,21 @@
                         <name>locales_date</name>
                         <based_on_data_type>date</based_on_data_type>
                         <validator>date</validator>
-                        <formatter>locates_date</formatter>
+                        <formatter>locales_date</formatter>
                         <unformatter>locales_date</unformatter>
                     </record>
                     <record>
                         <name>locales_time</name>
                         <based_on_data_type>time</based_on_data_type>
                         <validator>time</validator>
-                        <formatter>locates_time</formatter>
+                        <formatter>locales_time</formatter>
                         <unformatter>locales_time</unformatter>
                     </record>
                     <record>
                         <name>locales_datetime</name>
                         <based_on_data_type>datetime</based_on_data_type>
                         <validator>datetime</validator>
-                        <formatter>locates_datetime</formatter>
+                        <formatter>locales_datetime</formatter>
                         <unformatter>locales_datetime</unformatter>
                     </record>
                 </table>
@@ -46,8 +46,9 @@
                         <data_type>bigint</data_type>
                         <label>Country #</label>
                     </field>
-                    <field name="bundle_version_id" key="foreign" referenced-table-name="bundle_version" referenced-field-name="bundle_version_id">
-                        <data_type>bigint</data_type>
+                    <field name="bundle_name">
+                        <data_type>varchar</data_type>
+                        <max_length>128</max_length>
                         <label>Bundle</label>
                     </field>
                     <field name="name" index="Yes" index-size="32">
@@ -62,17 +63,17 @@
                         <nullable>No</nullable>
                         <label>Country name</label>
                     </field>
-                    <field name="date_data_type_id" key="foreign" referenced-table-name="date_type" referenced-field-name="data_type_id">
+                    <field name="date_data_type_id" key="foreign" referenced-table-name="data_type" referenced-field-name="data_type_id">
                         <data_type>bigint</data_type>
                         <lookup_table>data_type</lookup_table>
                         <label>Date data type</label>
                     </field>
-                    <field name="time_data_type_id" key="foreign" referenced-table-name="date_type" referenced-field-name="data_type_id">
+                    <field name="time_data_type_id" key="foreign" referenced-table-name="data_type" referenced-field-name="data_type_id">
                         <data_type>bigint</data_type>
                         <lookup_table>data_type</lookup_table>
                         <label>Time data type</label>
                     </field>
-                    <field name="datetime_data_type_id" key="foreign" referenced-table-name="date_type" referenced-field-name="data_type_id">
+                    <field name="datetime_data_type_id" key="foreign" referenced-table-name="data_type" referenced-field-name="data_type_id">
                         <data_type>bigint</data_type>
                         <lookup_table>data_type</lookup_table>
                         <label>Datetime data type</label>
@@ -95,7 +96,7 @@
                         <label>Label</label>
                         <description>For example, Home, Mobile, Cell...</description>
                     </field>
-                    <field name="data_type_id" key="foreign" referenced-table-name="date_type" referenced-field-name="data_type_id">
+                    <field name="data_type_id" key="foreign" referenced-table-name="data_type" referenced-field-name="data_type_id">
                         <data_type>bigint</data_type>
                         <lookup_table>data_type</lookup_table>
                         <label>Data type</label>
@@ -128,7 +129,7 @@
                         <nullable>No</nullable>
                         <label>Label</label>
                     </field>
-                    <field name="data_type_id" key="foreign" referenced-table-name="date_type" referenced-field-name="data_type_id">
+                    <field name="data_type_id" key="foreign" referenced-table-name="data_type" referenced-field-name="data_type_id">
                         <data_type>bigint</data_type>
                         <lookup_table>data_type</lookup_table>
                         <label>Data type</label>
