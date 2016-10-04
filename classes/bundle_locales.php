@@ -13,6 +13,15 @@ namespace adapt\locales{
         
         public function boot(){
             if (parent::boot()){
+
+                \adapt\base::extend('pget_language_id', function($_this) {
+                    return $_this->store('locales.language_id');
+                });
+
+                \adapt\base::extend('pset_language_id', function($_this, $language_id) {
+                    $_this->store('locales.language_id', $language_id);
+                });
+
                     $adapt = $this;
                     
                     $adapt->sanitize->add_format(
@@ -181,6 +190,20 @@ namespace adapt\locales{
                 return true;
             }
             
+            return false;
+        }
+
+        public function install()
+        {
+            if (parent::install()) {
+
+                $this->data_source->sql(
+                    'create index language_long_code
+                      on language (long_code(5));'
+                )->execute();
+
+                return true;
+            }
             return false;
         }
         
