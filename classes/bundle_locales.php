@@ -14,11 +14,11 @@ namespace adapt\locales{
         public function boot(){
             if (parent::boot()){
 
-                \adapt\base::extend('pget_language_id', function($_this) {
+                \adapt\base::extend('pget_current_language_id', function($_this) {
                     return $_this->store('locales.language_id');
                 });
 
-                \adapt\base::extend('pset_language_id', function($_this, $language_id) {
+                \adapt\base::extend('pset_current_language_id', function($_this, $language_id) {
                     $_this->store('locales.language_id', $language_id);
                 });
 
