@@ -87,16 +87,6 @@
                         <lookup_table>Currency</lookup_table>
                         <label>Currency</label>
                     </field>
-                    <field name="currency_decimal_separater">
-                        <data_type>varchar</data_type>
-                        <max_length>3</max_length>
-                        <label>Decimal separater</label>
-                    </field>
-                    <field name="currency_thousand_separater">
-                        <data_type>varchar</data_type>
-                        <max_length>3</max_length>
-                        <label>Thousands separater</label>
-                    </field>
                 </table>
                 <table name="country_phone_data_type">
                     <field name="country_phone_data_type_id" key="primary" auto-increment="Yes">
