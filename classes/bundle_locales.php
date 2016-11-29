@@ -65,8 +65,10 @@ namespace adapt\locales{
                              * INPUT: Y-m-d H:i:s
                              */
                             $adapt = $GLOBALS['adapt'];
-                            if (!is_null($adapt->setting('locales.default_datetime_format'))){
-                                return $adapt->sanitize->format($adapt->setting('locales.default_datetime_format'), $value);
+                            if ($value){
+                                if (!is_null($adapt->setting('locales.default_datetime_format'))){
+                                    return $adapt->sanitize->format($adapt->setting('locales.default_datetime_format'), $value);
+                                }
                             }
                             return $value;
                         }, "function(value){
