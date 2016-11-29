@@ -23,13 +23,13 @@ namespace adapt\locales{
                              * INPUT: Y-m-d
                              */
                             $adapt = $GLOBALS['adapt'];
-                            if (!is_null($adapt->setting('locales.default_date_format'))){
+                            if ($value && !is_null($adapt->setting('locales.default_date_format'))){
                                 return $adapt->sanitize->format($adapt->setting('locales.default_date_format'), $value);
                             }
                             
                             return $value;
                         }, "function(value){
-                            if (adapt.setting('locales.default_date_format') != null){
+                            if (value && adapt.setting('locales.default_date_format') != null){
                                 return adapt.sanitize.format(adapt.setting('locales.default_date_format'), value);
                             }
                             
@@ -44,13 +44,13 @@ namespace adapt\locales{
                              * INPUT: H:i:s
                              */
                             $adapt = $GLOBALS['adapt'];
-                            if (!is_null($adapt->setting('locales.default_time_format'))){
+                            if ($value && !is_null($adapt->setting('locales.default_time_format'))){
                                 return $adapt->sanitize->format($adapt->setting('locales.default_time_format'), $value);
                             }
                             
                             return $value;
                         }, "function(value){
-                            if (adapt.setting('locales.default_time_format') != null){
+                            if (value && adapt.setting('locales.default_time_format') != null){
                                 return adapt.sanitize.format(adapt.setting('locales.default_time_format'), value);
                             }
                             
@@ -69,10 +69,10 @@ namespace adapt\locales{
                                 if (!is_null($adapt->setting('locales.default_datetime_format'))){
                                     return $adapt->sanitize->format($adapt->setting('locales.default_datetime_format'), $value);
                                 }
-                            }
+                            }      
                             return $value;
                         }, "function(value){
-                            if (adapt.setting('locales.default_datetime_format') != null){
+                            if (value && adapt.setting('locales.default_datetime_format') != null){
                                 return adapt.sanitize.format(adapt.setting('locales.default_datetime_format'), value);
                             }
                             
