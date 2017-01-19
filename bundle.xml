@@ -150,7 +150,7 @@
                         <label>Max length</label>
                     </field>
                 </table>
-                <table name="language">
+<!--                <table name="language">
                     <field name="language_id" key="primary" auto-increment="Yes">
                         <data_type>bigint</data_type>
                         <label>Language #</label>
@@ -212,7 +212,7 @@
                         <label>String contents for the string</label>
                         <nullable>No</nullable>
                     </field>
-                </table>
+                </table>-->
             </add>
             
         </schema>
