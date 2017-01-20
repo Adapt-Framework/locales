@@ -21,6 +21,10 @@
                 <name>currency</name>
                 <version>1.0</version>
             </bundle>
+            <bundle>
+                <name>language</name>
+                <version>1.0</version>
+            </bundle>
         </depends_on>
         <schema>
             <add>
