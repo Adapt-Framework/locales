@@ -155,10 +155,13 @@
                     </field>
                 </table>
             </add>
-            
         </schema>
         <settings>
             <category name="Default locales">
+                <setting>
+                    <name>locales.default_country</name>
+                    <label>Default country</label>
+                </setting>
                 <setting>
                     <name>locales.default_date_format</name>
                     <label>Default date format</label>
