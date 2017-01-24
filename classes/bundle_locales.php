@@ -199,8 +199,8 @@ namespace adapt\locales{
                                 $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_time_pattern', 'content' => 'H:i:s']));
                                 $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_datetime_pattern', 'content' => 'Y-m-d H:i:s']));
                             }
-                            print_r($event);
-                            exit(1);
+                            //print_r($event);
+                            //exit(1);
                         }
                     );
                 }
