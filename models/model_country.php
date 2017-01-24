@@ -1,6 +1,6 @@
 <?php
 
-namespace \adapt\locales;
+namespace adapt\locales;
 
 class model_country extends \adapt\model {
     

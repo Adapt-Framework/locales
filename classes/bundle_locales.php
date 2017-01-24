@@ -184,7 +184,12 @@ namespace adapt\locales{
                         \adapt\page::EVENT_RENDER, 
                         function($event){
                             if ($event['object']->country->is_loaded){
-                                print_r($event['object']->country->to_hash());
+                                $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_date_format', 'content' => $event['object']->country->date_data_type->name]));
+                                $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_time_format', 'content' => $event['object']->country->time_data_type->name]));
+                                $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_datetime_format', 'content' => $event['object']->country->datetime_data_type->name]));
+                                $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_date_pattern', 'content' => $event['object']->country->date_data_type->datetime_format]));
+                                $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_time_pattern', 'content' => $event['object']->country->time_data_type->datetime_format]));
+                                $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_datetime_pattern', 'content' => $event['object']->country->datetime_data_type->datetime_format]));
                             }else{
                                 // Set defaults
                                 $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_date_format', 'content' => 'date']));
