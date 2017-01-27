@@ -183,24 +183,27 @@ namespace adapt\locales{
                     $this->dom->listen(
                         \adapt\page::EVENT_RENDER, 
                         function($event){
-                            if ($event['object']->country->is_loaded){
-                                $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_date_format', 'content' => $event['object']->country->date_data_type->name]));
-                                $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_time_format', 'content' => $event['object']->country->time_data_type->name]));
-                                $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_datetime_format', 'content' => $event['object']->country->datetime_data_type->name]));
-                                $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_date_pattern', 'content' => $event['object']->country->date_data_type->datetime_format]));
-                                $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_time_pattern', 'content' => $event['object']->country->time_data_type->datetime_format]));
-                                $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_datetime_pattern', 'content' => $event['object']->country->datetime_data_type->datetime_format]));
-                            }else{
-                                // Set defaults
-                                $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_date_format', 'content' => 'date']));
-                                $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_time_format', 'content' => 'time']));
-                                $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_datetime_format', 'content' => 'datetime']));
-                                $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_date_pattern', 'content' => 'Y-m-d']));
-                                $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_time_pattern', 'content' => 'H:i:s']));
-                                $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_datetime_pattern', 'content' => 'Y-m-d H:i:s']));
+                            if (!$this->setting("added_locale_to_head")) {
+                                if ($event['object']->country->is_loaded){
+                                    $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_date_format', 'content' => $event['object']->country->date_data_type->name]));
+                                    $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_time_format', 'content' => $event['object']->country->time_data_type->name]));
+                                    $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_datetime_format', 'content' => $event['object']->country->datetime_data_type->name]));
+                                    $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_date_pattern', 'content' => $event['object']->country->date_data_type->datetime_format]));
+                                    $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_time_pattern', 'content' => $event['object']->country->time_data_type->datetime_format]));
+                                    $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_datetime_pattern', 'content' => $event['object']->country->datetime_data_type->datetime_format]));
+                                }else{
+                                    // Set defaults
+                                    $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_date_format', 'content' => 'date']));
+                                    $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_time_format', 'content' => 'time']));
+                                    $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_datetime_format', 'content' => 'datetime']));
+                                    $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_date_pattern', 'content' => 'Y-m-d']));
+                                    $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_time_pattern', 'content' => 'H:i:s']));
+                                    $event['object']->head->add(new html_meta(['class' => 'setting', 'name' => 'locales.default_datetime_pattern', 'content' => 'Y-m-d H:i:s']));
+                                }
+                                //print_r($event);
+                                //exit(1);
+                                $this->setting("added_locale_to_head", true);
                             }
-                            //print_r($event);
-                            //exit(1);
                         }
                     );
                 }
@@ -214,18 +217,21 @@ namespace adapt\locales{
                 $global_adapt->on(
                     \adapt\base::EVENT_READY,
                     function($event){
-                        $adapt = $GLOBALS['adapt'];
-                        if ($adapt->dom && $adapt->dom instanceof \adapt\page){
+                        if (!$this->setting("added_locale_to_head")) {
+                            $adapt = $GLOBALS['adapt'];
+                            if ($adapt->dom && $adapt->dom instanceof \adapt\page){
 
-                            $datetime = $adapt->data_source->get_data_type($adapt->setting('locales.default_datetime_format'));
-                            $date = $adapt->data_source->get_data_type($adapt->setting('locales.default_date_format'));
-                            $time = $adapt->data_source->get_data_type($adapt->setting('locales.default_time_format'));
-                            $adapt->dom->head->add(new html_meta(array('class' => 'setting', 'name' => 'locales.default_date_format', 'content' => $date['name'])));
-                            $adapt->dom->head->add(new html_meta(array('class' => 'setting', 'name' => 'locales.default_time_format', 'content' => $time['name'])));
-                            $adapt->dom->head->add(new html_meta(array('class' => 'setting', 'name' => 'locales.default_datetime_format', 'content' => $datetime['name'])));
-                            $adapt->dom->head->add(new html_meta(array('class' => 'setting', 'name' => 'locales.default_date_pattern', 'content' => $date['datetime_format'])));
-                            $adapt->dom->head->add(new html_meta(array('class' => 'setting', 'name' => 'locales.default_time_pattern', 'content' => $time['datetime_format'])));
-                            $adapt->dom->head->add(new html_meta(array('class' => 'setting', 'name' => 'locales.default_datetime_pattern', 'content' => $datetime['datetime_format'])));
+                                $datetime = $adapt->data_source->get_data_type($adapt->setting('locales.default_datetime_format'));
+                                $date = $adapt->data_source->get_data_type($adapt->setting('locales.default_date_format'));
+                                $time = $adapt->data_source->get_data_type($adapt->setting('locales.default_time_format'));
+                                $adapt->dom->head->add(new html_meta(array('class' => 'setting', 'name' => 'locales.default_date_format', 'content' => $date['name'])));
+                                $adapt->dom->head->add(new html_meta(array('class' => 'setting', 'name' => 'locales.default_time_format', 'content' => $time['name'])));
+                                $adapt->dom->head->add(new html_meta(array('class' => 'setting', 'name' => 'locales.default_datetime_format', 'content' => $datetime['name'])));
+                                $adapt->dom->head->add(new html_meta(array('class' => 'setting', 'name' => 'locales.default_date_pattern', 'content' => $date['datetime_format'])));
+                                $adapt->dom->head->add(new html_meta(array('class' => 'setting', 'name' => 'locales.default_time_pattern', 'content' => $time['datetime_format'])));
+                                $adapt->dom->head->add(new html_meta(array('class' => 'setting', 'name' => 'locales.default_datetime_pattern', 'content' => $datetime['datetime_format'])));
+                                $this->setting("added_locale_to_head", true);
+                            }
                         }
                     }
                 );
