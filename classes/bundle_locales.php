@@ -255,12 +255,6 @@ namespace adapt\locales{
         public function install()
         {
             if (parent::install()) {
-
-                $this->data_source->sql(
-                    'create index language_long_code
-                      on language (long_code(5));'
-                )->execute();
-
                 return true;
             }
             return false;
