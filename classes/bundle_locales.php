@@ -19,16 +19,17 @@ namespace adapt\locales{
                 $adapt->sanitize->add_format(
                     'locales_date',
                     function($value){
-                        /*
-                         * INPUT: Y-m-d
-                         */
-                        $adapt = $GLOBALS['adapt'];
-                        if ($adapt->country instanceof \adapt\model && $adapt->country->table_name == 'country'){
-                            return $adapt->sanitize->format($adapt->country->date_data_type->name, $value);
-                        }elseif ($value && !is_null($adapt->setting('locales.default_date_format'))){
-                            return $adapt->sanitize->format($adapt->setting('locales.default_date_format'), $value);
+                        if ($value){
+                            /*
+                             * INPUT: Y-m-d
+                             */
+                            $adapt = $GLOBALS['adapt'];
+                            if ($adapt->country instanceof \adapt\model && $adapt->country->table_name == 'country'){
+                                return $adapt->sanitize->format($adapt->country->date_data_type->name, $value);
+                            }elseif ($value && !is_null($adapt->setting('locales.default_date_format'))){
+                                return $adapt->sanitize->format($adapt->setting('locales.default_date_format'), $value);
+                            }
                         }
-
                         return $value;
                     }, "function(value){
                         if (value && adapt.setting('locales.default_date_format') != null){
@@ -42,16 +43,17 @@ namespace adapt\locales{
                 $adapt->sanitize->add_format(
                     'locales_time',
                     function($value){
-                        /*
-                         * INPUT: H:i:s
-                         */
-                        $adapt = $GLOBALS['adapt'];
-                        if ($adapt->country instanceof \adapt\model && $adapt->country->table_name == 'country'){
-                            return $adapt->sanitize->format($adapt->country->time_data_type->name, $value);
-                        }elseif ($value && !is_null($adapt->setting('locales.default_time_format'))){
-                            return $adapt->sanitize->format($adapt->setting('locales.default_time_format'), $value);
+                        if ($value){
+                            /*
+                             * INPUT: H:i:s
+                             */
+                            $adapt = $GLOBALS['adapt'];
+                            if ($adapt->country instanceof \adapt\model && $adapt->country->table_name == 'country'){
+                                return $adapt->sanitize->format($adapt->country->time_data_type->name, $value);
+                            }elseif ($value && !is_null($adapt->setting('locales.default_time_format'))){
+                                return $adapt->sanitize->format($adapt->setting('locales.default_time_format'), $value);
+                            }
                         }
-
                         return $value;
                     }, "function(value){
                         if (value && adapt.setting('locales.default_time_format') != null){
@@ -65,17 +67,19 @@ namespace adapt\locales{
                 $adapt->sanitize->add_format(
                     'locales_datetime',
                     function($value){
-                        /*
-                         * INPUT: Y-m-d H:i:s
-                         */
-                        $adapt = $GLOBALS['adapt'];
-                        if ($adapt->country instanceof \adapt\model && $adapt->country->table_name == 'country'){
-                            return $adapt->sanitize->format($adapt->country->datetime_data_type->name, $value);
-                        }elseif ($value){
-                            if (!is_null($adapt->setting('locales.default_datetime_format'))){
-                                return $adapt->sanitize->format($adapt->setting('locales.default_datetime_format'), $value);
+                        if ($value){
+                            /*
+                             * INPUT: Y-m-d H:i:s
+                             */
+                            $adapt = $GLOBALS['adapt'];
+                            if ($adapt->country instanceof \adapt\model && $adapt->country->table_name == 'country'){
+                                return $adapt->sanitize->format($adapt->country->datetime_data_type->name, $value);
+                            }elseif ($value){
+                                if (!is_null($adapt->setting('locales.default_datetime_format'))){
+                                    return $adapt->sanitize->format($adapt->setting('locales.default_datetime_format'), $value);
+                                }
                             }
-                        }      
+                        }
                         return $value;
                     }, "function(value){
                         if (value && adapt.setting('locales.default_datetime_format') != null){
