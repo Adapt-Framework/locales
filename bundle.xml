@@ -4,7 +4,7 @@
         <name>locales</name>
         <label>Adapt Locales</label>
         <type>extension</type>
-        <version>1.0.0</version>
+        <version>0.8.0</version>
         <namespace>\adapt\locales</namespace>
         <version_status>release</version_status>
         <availability>public</availability>
@@ -19,11 +19,11 @@
             </bundle>
             <bundle>
                 <name>currency</name>
-                <version>1.0</version>
+                <version>0.9</version>
             </bundle>
             <bundle>
                 <name>language</name>
-                <version>1.0</version>
+                <version>0.7</version>
             </bundle>
         </depends_on>
         <schema>
